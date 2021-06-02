@@ -1,9 +1,9 @@
 //
 //  DemoList.swift
-//  ListCRUDSwiftUI
+//  swift-ui-base
 //
-//  Created by Vadym Bulavin on 2/5/20.
-//  Copyright © 2020 Vadym Bulavin. All rights reserved.
+//  Created by Aravind on 01/06/21.
+//  Copyright © 2021 Rootstrap. All rights reserved.
 //
 
 import SwiftUI

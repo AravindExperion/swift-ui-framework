@@ -2,10 +2,9 @@
 //  BaseService.swift
 //  swift-ui-base
 //
-//  Created by Germán Stábile on 4/1/20.
-//  Copyright © 2020 Rootstrap. All rights reserved.
+//  Created by Aravind on 01/06/21.
+//  Copyright © 2021 Rootstrap. All rights reserved.
 //
-
 import Foundation
 import UIKit
 import Combine

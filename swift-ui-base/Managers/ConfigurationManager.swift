@@ -2,10 +2,9 @@
 //  ConfigurationManager.swift
 //  swift-ui-base
 //
-//  Created by Pablo Malvasio on 7/30/20.
-//  Copyright © 2017 Rootstrap Inc. All rights reserved.
+//  Created by Aravind on 01/06/21.
+//  Copyright © 2021 Rootstrap. All rights reserved.
 //
-
 import Foundation
 
 class ConfigurationManager: NSObject {

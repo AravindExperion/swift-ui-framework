@@ -1,9 +1,8 @@
 //
-//  SessionDataManager.swift
 //  swift-ui-base
 //
-//  Created by Juan Pablo Mazza on 11/8/16.
-//  Copyright © 2016 Rootstrap. All rights reserved.
+//  Created by Aravind on 01/06/21.
+//  Copyright © 2021 Rootstrap. All rights reserved.
 //
 
 import UIKit
