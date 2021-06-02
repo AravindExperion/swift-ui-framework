@@ -15,21 +15,22 @@ struct Item: Identifiable {
 }
 
 struct DemoList: View {
-    @State private var items: [Item] = []
+	@ObservedObject var viewModel = HomeViewModel()
     @State private var editMode = EditMode.inactive
     private static var count = 0
 
     var body: some View {
         NavigationView {
 			if #available(iOS 14.0, *) {
+//				Text("\(viewModel.count)")
 				List {
-					ForEach(items) { item in
+					ForEach(viewModel.items) { item in
 						Text(item.title)
 					}
 					.onDelete(perform: onDelete)
 					.onMove(perform: onMove)
 				}
-				.navigationBarTitle("List")
+				.navigationBarTitle("List \(viewModel.count)")
 				.toolbar {
 					ToolbarItem(placement: .automatic) {
 						EditButton()
@@ -43,12 +44,13 @@ struct DemoList: View {
 						}
 					}
 				}
-//				.navigationBarItems(leading: EditButton(), trailing: addButton)
 				.environment(\.editMode, $editMode)
 			} else {
 				// Fallback on earlier versions
 			}
-        }
+        }.onAppear(){
+			viewModel.loadAllData()
+	 }
     }
     
     private var addButton: some View {
@@ -61,18 +63,15 @@ struct DemoList: View {
     }
     
     private func onDelete(offsets: IndexSet) {
-        items.remove(atOffsets: offsets)
+		viewModel.onDelete(offsets: offsets)
     }
     
     private func onMove(source: IndexSet, destination: Int) {
-        items.move(fromOffsets: source, toOffset: destination)
+		viewModel.onMove(source: source, destination: destination)
     }
     
-    
-    
     private func onAdd() {
-        items.append(Item(title: "Item #\(Self.count)"))
-        Self.count += 1
+		viewModel.onAdd()
     }
 }
 

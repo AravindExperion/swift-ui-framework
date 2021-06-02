@@ -30,7 +30,7 @@ struct RootView: View {
 		return AnyView(DemoList())
 
     default:
-      return AnyView(SignUpView())
+      return AnyView(DemoList())
     }
   }
 }

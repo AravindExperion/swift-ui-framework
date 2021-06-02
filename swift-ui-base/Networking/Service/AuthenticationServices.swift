@@ -127,6 +127,7 @@ class AuthenticationServices {
 //			print("Async after 2 seconds")
 //			success("1234")
 //		}
+		
 		return Future<String,Error> { promise in
 
 		APIClient.request(
