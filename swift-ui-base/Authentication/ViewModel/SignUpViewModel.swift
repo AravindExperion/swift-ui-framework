@@ -52,6 +52,7 @@ class SignUpViewModel: ObservableObject, Identifiable {
 				print(completion)
 			}) { [weak self] (dataObj) in
 				self?.isLoading = false
+				ViewRouter.shared.currentRoot = .otp(self?.phoneData.value ?? "")
 				print(dataObj)
 			}
 			.store(in: &subscriptions)

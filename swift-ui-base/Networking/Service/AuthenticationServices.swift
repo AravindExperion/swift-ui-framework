@@ -123,10 +123,6 @@ class AuthenticationServices {
 		let param: [String: Any] = [
 			"phoneNumber": phoneNumber,
 		]
-//		DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-//			print("Async after 2 seconds")
-//			success("1234")
-//		}
 		
 		return Future<String,Error> { promise in
 
@@ -136,39 +132,29 @@ class AuthenticationServices {
 			params: param,
 			success: { response, headers in
 				AuthenticationServices.saveUserSession(fromResponse: response, headers: headers)
-//				success(UserDataManager.currentUser)
 				promise(.success("1234"))
 			},
 			failure: { error in
 				promise(.success("1234"))
-//				failure(error)
               })
 	  }
 	}
 	
-	class func validateOtp(_ otp: String,
-						   phoneNumber:String,
-					  success: @escaping (_ otp: Bool?) -> Void,
-					  failure: @escaping (_ error: Error) -> Void) {
+	class func validateOtpWithCombine(_ otp: String,
+									  phoneNumber:String) -> Future<User,Error>{
 		let _: [String: Any] = [
 			"phoneNumber": phoneNumber,
 			"otp":otp
 		]
-		DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-			print("Async after 2 seconds")
-			success(true)
-		}
 		
-//		APIClient.request(
-//			.post,
-//			url: usersUrl,
-//			params: userParameters,
-//			success: { response, headers in
-//				AuthenticationServices.saveUserSession(fromResponse: response, headers: headers)
-//				success(UserDataManager.currentUser)
-//			},
-//			failure: failure
-//		)
+		return  Future<User,Error> { promise in
+			DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+				print("Async after 2 seconds")
+				var user = User(id: 1, username: "user", email: "user@gmail")
+				user.role = .user
+				promise(.success(user))
+			}
+		}
 	}
   //Example method that uploads base64 encoded image.
   class func signup(_ phoneNumber: String,

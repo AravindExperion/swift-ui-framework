@@ -23,7 +23,7 @@ struct OtpView: View {
 		 .modifier(MainTitle())
 	   
 	   Spacer()
-		Text(mobileNumber)
+		Text(viewModel.mobileNumber)
 		  .modifier(MainTitle())
 	   VStack(spacing: 20) {
 		 TextFieldView(fieldData: $viewModel.otpData)

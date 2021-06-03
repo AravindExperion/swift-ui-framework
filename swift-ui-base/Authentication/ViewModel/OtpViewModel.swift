@@ -6,8 +6,10 @@
 //  Copyright © 2021 Rootstrap. All rights reserved.
 //
 import Foundation
+import Combine
 
 class OtpViewModel: ObservableObject, Identifiable {
+	private var subscriptions = Set<AnyCancellable>()
 	@Published var otpData = TextFieldData(
 	  title: "Otp",
 	  validationType: .nonEmpty,
@@ -37,17 +39,21 @@ class OtpViewModel: ObservableObject, Identifiable {
   
   func attemptOtpValidation() {
 	isLoading = true
-	AuthenticationServices.validateOtp(
-		otpData.value, phoneNumber: mobileNumber,
-
-	  success: { [weak self] _ in
-		self?.isLoading = false
-		ViewRouter.shared.currentRoot = .list
-	  },
-	  failure: { [weak self] error in
-		self?.isLoading = false
-		self?.errored = true
-		self?.error = error.localizedDescription
-	})
+	isLoading = true
+	let result = AuthenticationServices.validateOtpWithCombine(otpData.value, phoneNumber: mobileNumber)
+	result.receive(on:DispatchQueue.main)
+		.sink(receiveCompletion: { (completion) in
+			print(completion)
+		}) { [weak self] (user) in
+			self?.isLoading = false
+			if (user.role == .admin){
+				ViewRouter.shared.currentRoot = .list
+			}
+			else {
+				ViewRouter.shared.currentRoot = .profile
+			}
+			print(user)
+		}
+		.store(in: &subscriptions)
   }
 }

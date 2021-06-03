@@ -8,11 +8,17 @@
 
 import Foundation
 
+enum userRoles:Int{
+	case admin
+	case user
+}
+
 struct User: Codable {
   var id: Int
   var username: String
   var email: String
   var imageURL: URL?
+  var role:userRoles = .admin
   
   private enum CodingKeys: String, CodingKey {
     case id
