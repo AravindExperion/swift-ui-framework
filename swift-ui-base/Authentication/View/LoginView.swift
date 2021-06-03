@@ -45,7 +45,7 @@ struct LoginView: View {
               message: Text(viewModel.error),
               dismissButton: .default(Text("Got it!")))
       }
-    }
+	}
   }
   
   func loginButtonTapped() {
